@@ -10,7 +10,7 @@ import java.util.*;
 public class TypeToRandomContext {
 
     private Map<String, TypeRandom> randomMap = new HashMap<>();
-    Set<String> basicTypes = new HashSet();
+    private Set<String> basicTypes = new HashSet<>();
 
     public TypeToRandomContext() {
         randomMap.put(Date.class.getName(), new DateTypeRandom());
@@ -28,6 +28,6 @@ public class TypeToRandomContext {
         if (basicTypes.contains(key)) {
             key = "java.lang.Long";
         }
-        return randomMap.get(key).get();
+        return randomMap.get(key) != null ? randomMap.get(key).get() : null;
     }
 }
