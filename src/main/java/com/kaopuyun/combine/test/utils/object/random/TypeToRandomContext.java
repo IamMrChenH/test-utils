@@ -1,5 +1,8 @@
 package com.kaopuyun.combine.test.utils.object.random;
 
+import com.kaopuyun.combine.test.utils.object.random.number.DoubleTypeRandom;
+import com.kaopuyun.combine.test.utils.object.random.number.LongTypeRandom;
+
 import java.util.*;
 
 /**
@@ -15,12 +18,11 @@ public class TypeToRandomContext {
     public TypeToRandomContext() {
         randomMap.put(Date.class.getName(), new DateTypeRandom());
         randomMap.put(Long.class.getName(), new LongTypeRandom());
+        randomMap.put(Double.class.getName(), new DoubleTypeRandom());
         randomMap.put(String.class.getName(), new StringTypeRandom());
-
         basicTypes.add("long");
         basicTypes.add("int");
         basicTypes.add("short");
-
     }
 
     public Object get(Class<?> type) {

@@ -1,5 +1,6 @@
-package com.kaopuyun.combine.test.utils.object.random;
+package com.kaopuyun.combine.test.utils.object.random.number;
 
+import com.kaopuyun.combine.test.utils.object.random.TypeRandom;
 import org.springframework.stereotype.Component;
 
 import java.util.Random;
