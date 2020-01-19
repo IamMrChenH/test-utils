@@ -23,7 +23,9 @@ public class ObjectUtils {
             Set<Field> fields = getFields(aClass);
             for (Field field : fields) {
                 field.setAccessible(true);
-                field.set(reusult, typeToRandomContext.get(field.getType()));
+                if (field.get(reusult) == null) {
+                    field.set(reusult, typeToRandomContext.get(field.getType()));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

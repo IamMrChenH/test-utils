@@ -10,10 +10,10 @@ import java.util.Random;
  * @version 1.0
  * @date 2020/01/08
  */
-@Component("java.lang.Long")
-public class LongTypeRandom implements TypeRandom<Long> {
+@Component("java.lang.Integer")
+public class IntegerTypeRandom implements TypeRandom<Integer> {
     @Override
-    public Long get() {
-        return new Long(System.nanoTime() >> new Random().nextLong());
+    public Integer get() {
+        return new Random().nextInt();
     }
 }
