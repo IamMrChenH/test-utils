@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class AssertMethodBuilder implements Builder<String> {
 
-    private static final String CODE_TEMP = "\n\t@Test\n\tpublic void %s() throws Exception {\n%s\t}\n";
+    private static final String CODE_TEMP = "\n\t@Test\n\tpublic void %sTest() throws Exception {\n%s\t}\n";
 
     private Method method;
 
