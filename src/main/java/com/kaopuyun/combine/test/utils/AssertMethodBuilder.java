@@ -30,7 +30,8 @@ public class AssertMethodBuilder implements Builder<String> {
         Class<?>[] parameterTypes = method.getParameterTypes();
         Set<Method> returnMethods = new MethodBuild(returnType).filterStartsWith("get").build();
         Set<Method> parameterMethods = new MethodBuild(parameterTypes).filterStartsWith("get").build();
-        Set<Method> identicalMethods = MethodUtils.filterMethodNameDifferent(returnMethods, parameterMethods);
+//        Set<Method> identicalMethods = MethodUtils.filterMethodNameDifferent(returnMethods, parameterMethods);
+        Set<Method> identicalMethods = returnMethods;
 
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < parameterTypes.length; i++) {
