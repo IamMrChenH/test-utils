@@ -1,10 +1,10 @@
 package com.kaopuyun.combine.test.utils.object;
 
+import com.kaopuyun.combine.test.utils.reflect.FieldUtils;
 import com.kaopuyun.combine.test.utils.object.random.TypeToRandomContext;
-import com.google.common.collect.Sets;
+import org.springframework.util.Assert;
 
 import java.lang.reflect.Field;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -16,16 +16,17 @@ public class ObjectUtils {
 
     private static TypeToRandomContext typeToRandomContext = new TypeToRandomContext();
 
-    public static <T> T newInstance(Class<T> aClass) {
-        T reusult = null;
+    private static Object newInstance(Object object, Class<?> aClass) {
+        Assert.notNull(aClass, "不能输入空class！");
+        Object reusult = object;
         try {
-            reusult = aClass.newInstance();
-            Set<Field> fields = getFields(aClass);
+            if (object == null) {
+                reusult = aClass.newInstance();
+            }
+
+            Set<Field> fields = FieldUtils.getFields(aClass);
             for (Field field : fields) {
-                field.setAccessible(true);
-                if (field.get(reusult) == null) {
-                    field.set(reusult, typeToRandomContext.get(field.getType()));
-                }
+                setFieldRandomValue(reusult, field);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,14 +34,24 @@ public class ObjectUtils {
         return reusult;
     }
 
-    public static <T> Set<Field> getFields(Class<T> aClass) {
-        Set<Field> result = new HashSet<>();
-        if (aClass != null) {
-            Field[] fields = aClass.getDeclaredFields();
-            result.addAll(Sets.newHashSet(fields));
-            result.addAll(getFields(aClass.getSuperclass()));
+    public static <T> T newInstance(Class<T> aClass) {
+        return (T) newInstance(null, aClass);
+    }
+
+    public static <T> T newInstance(T object) {
+        return (T) newInstance(object, object.getClass());
+    }
+
+
+    private static <T> void setFieldRandomValue(T reusult, Field field) throws IllegalAccessException {
+        setFieldValue(reusult, field, typeToRandomContext.get(field.getType()));
+    }
+
+    private static <T> void setFieldValue(T reusult, Field field, Object object) throws IllegalAccessException {
+        field.setAccessible(true);
+        if (field.get(reusult) == null) {
+            field.set(reusult, object);
         }
-        return result;
     }
 
 

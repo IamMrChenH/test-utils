@@ -1,13 +1,13 @@
 package com.kaopuyun.combine.test;
 
-import com.kaopuyun.combine.test.model.DetectionDataExport;
-import com.kaopuyun.combine.test.utils.object.ObjectUtils;
+import com.kaopuyun.combine.test.model.DetectionDataExportServiceMapper;
+import com.kaopuyun.combine.test.utils.AssertClassBuilder;
 
 public class DemoApplication {
 
     public static void main(String[] args) {
-        DetectionDataExport source = ObjectUtils.newInstance(DetectionDataExport.class);
-        System.out.println(source);
+        System.out.println(new AssertClassBuilder(DetectionDataExportServiceMapper.class).build());
     }
+
 
 }
